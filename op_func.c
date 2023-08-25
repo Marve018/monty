@@ -51,3 +51,45 @@ void pall(stack_t **stack, unsigned int value)
 	else
 		exit(EXIT_FAILURE);
 }
+
+/**
+ * pint - Prints the top value of a stack_t.
+ * @stack: A pointer to the top
+ * @value: line number.
+ */
+void pint(stack_t **stack, unsigned int value)
+{
+	stack_t *tmp_node;
+
+	tmp_node = *stack;
+	if (*stack != NULL)
+		printf("%i\n", tmp_node->n);
+	else
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", value);
+		exit(EXIT_FAILURE);
+	}
+}
+
+/**
+ * pop - Removes the top value element.
+ * @stack: A pointer to the top
+ * @value: line number.
+ */
+void pop(stack_t **stack, unsigned int value)
+{
+	stack_t *tmp, *eraser;
+
+	tmp = *stack;
+	if (tmp == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", value);
+		exit(EXIT_FAILURE);
+	}
+	eraser = *stack;
+	*stack = tmp->next;
+	tmp = tmp->next;
+	if (tmp != NULL)
+		tmp->prev = NULL;
+	free(eraser);
+}

@@ -9,7 +9,7 @@ void (*get_function(char *command))(stack_t**, unsigned int)
 {
 	unsigned int i = 0;
 	instruction_t opcodes[] = {{"push", push}, {"pall", pall},
-		{NULL, NULL}
+		{"pint", pint}, {"pop", pop}, {NULL, NULL}
 	};
 
 	for (; opcodes[i].opcode; i++)
