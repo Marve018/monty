@@ -41,6 +41,7 @@ void op_checker(char *buff, char *_opcode, int line_number)
 	unknown_op_error(_opcode, line_number);
 }
 
+stack_t *head = NULL;
 /**
  * split - split the line into tokens
  * @line: string read by getline function
