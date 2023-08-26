@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
 		if (op)
 		{
-			wrapper(line_num, op, &head);
+			wrapper(op, &head, line_num);
 		}
 
 		free(op);

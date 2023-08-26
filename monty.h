@@ -75,7 +75,7 @@ void mul(stack_t **stack, unsigned int value);
 
 void free_head(stack_t *head);
 char **_splitline(char *line);
-int wrapper(unsigned int line, char **chk_strings, stack_t **stack);
+int wrapper(char **chk_strings, stack_t **stack, unsigned int line);
 void (*get_function(char *cmd, unsigned int line_num))(stack_t**, unsigned int);
 /*void split(char *line, int num);
 void (*get_function(char *command))(stack_t**, unsigned int);

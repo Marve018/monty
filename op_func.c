@@ -8,7 +8,6 @@
 void push(stack_t **stack, unsigned int value)
 {
 	stack_t *new_node;
-	stack_t *present = *stack;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
@@ -18,13 +17,19 @@ void push(stack_t **stack, unsigned int value)
 	}
 
 	new_node->n = value;
+	if (*stack)
+	{
+		new_node->next = *stack;
+		new_node->prev = (*stack)->prev;
+		(*stack)->prev = new_node;
+		*stack = new_node;
+		return;
+	}
+
 	new_node->next = *stack;
 	new_node->prev = NULL;
+	*stack = new_node;
 
-	if (present != NULL)
-	{
-		present->prev = new_node;
-	}
 }
 
 /**
