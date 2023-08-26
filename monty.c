@@ -8,10 +8,12 @@
  */
 int main(int argc, char *argv[])
 {
+	stack_t *head = NULL;
 	char *file_idx;
 	FILE *file;
 	char file_line[MAX_LINE_LENGTH];
 	unsigned int line_num;
+	char **op;
 
 	if (argc != 2)
 	{
@@ -27,16 +29,23 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	
+
 	line_num = 0;
 	while (fgets(file_line, MAX_LINE_LENGTH, file) != NULL)
 	{
-		split(file_line, line_num);
+		op = _splitline(file_line);
+
+		if (op)
+		{
+			wrapper(line_num, op, &head);
+		}
+
+		free(op);
 		line_num++;
 	}
-	
+
 	fclose(file);
 	exit(EXIT_SUCCESS);
 
-	return (0);
+	return (EXIT_SUCCESS);
 }

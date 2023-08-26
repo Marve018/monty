@@ -13,7 +13,7 @@
 #include <unistd.h>
 
 #define _GNU_SOURCE
-#define DELIMS "\n \t\r"
+#define DELIMS "\n \t\a\b"
 #define MAX_LINE_LENGTH 1024
 
 /**
@@ -46,6 +46,20 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct glob_vars - struct for global variables
+ * @glob_int: integer
+ * Description: structure that contains the variables
+ * shared across the whole program
+ */
+typedef struct glob_vars
+{
+	int glob_int;
+} glob_t;
+
+extern glob_t glob_vars;
+glob_t glob_vars;
+
 extern stack_t *head;
 
 void push(stack_t **stack, unsigned int value);
@@ -59,19 +73,20 @@ void sub(stack_t **stack, unsigned int line_number);
 void divide(stack_t **stack, unsigned int value);
 void mul(stack_t **stack, unsigned int value);
 
-void split(char *line, int num);
+void free_head(stack_t *head);
+char **_splitline(char *line);
+int wrapper(unsigned int line, char **chk_strings, stack_t **stack);
+void (*get_function(char *cmd, unsigned int line_num))(stack_t**, unsigned int);
+/*void split(char *line, int num);
 void (*get_function(char *command))(stack_t**, unsigned int);
 int unknown_op_error(char *opcode, unsigned int lines);
 int push_err(int linenum);
-void op_checker(char *buff, char *_opcode, int line_number);
-
+void op_checker(char *buff, stack_t **stack, int line_number);
+*/
 void mod(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t **stack);
-
-int is_digit(char *c);
-void free_everything(stack_t **stack);
+int isnumber(char *str);
 
 #endif

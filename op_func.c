@@ -25,7 +25,6 @@ void push(stack_t **stack, unsigned int value)
 	{
 		present->prev = new_node;
 	}
-	 
 }
 
 /**
@@ -40,16 +39,11 @@ void pall(stack_t **stack, unsigned int value)
 	(void)value;
 
 	tmp = *stack;
-	if (*stack != NULL)
+	while (tmp != NULL)
 	{
-		while (tmp != NULL)
-		{
-			printf("%d\n", tmp->n);
-			tmp = tmp->prev;
-		}
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
-	else
-		exit(EXIT_FAILURE);
 }
 
 /**
